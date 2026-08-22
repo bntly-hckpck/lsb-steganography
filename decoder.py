@@ -32,7 +32,10 @@ def decode_message(image_path):
             else:
                 zero_counter = 0 # if bit is 1, reset 0s counter completely
 
-            bits.append(bit) # add bit to bits list
+            if zero_counter != 16: # if no terminator yet
+                bits.append(bit) # add bit to bits list
+            else:
+                break
 
     if zero_counter < 16: # if there are no 16 0s found, error
         return "error: no terminator found in this image"
