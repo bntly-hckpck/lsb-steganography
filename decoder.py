@@ -14,17 +14,17 @@ def bits_to_char(bits):
 # decoding the message
 def decode_message(image_path):
     image = Image.open(image_path) # open image from image_path
-    rgb_image = image.convert('RGB') # convert image to RGB, preventing channel-related errors
+    rgba_image = image.convert('RGBA') # convert image to RGBA, preventing channel-related errors
 
     bits = [] # empty list for bits
     zero_counter = 0 # 0s counter (for terminator)
 
-    for r, g, b in rgb_image.getdata(): # for every rgb pixel in image
+    for r, g, b, a in rgba_image.getdata(): # for every rgba pixel in image
 
         if zero_counter == 16: # before anything, if terminator (16 0s) is encountered, break out!
             break
 
-        for channel in (r, g, b): # for every rgb channel
+        for channel in (r, g, b): # for every rgb channel only
             bit = channel & 1 # desired bit is least significant bit (last one)
 
             if bit == 0: # if current bit is 0, check if we're near the terminator
@@ -36,10 +36,11 @@ def decode_message(image_path):
                 bits.append(bit) # add bit to bits list
             else:
                 break
+            
 
     if zero_counter < 16: # if there are no 16 0s found, error
         return "error: no terminator found in this image"
-        
+    
     secret_message = '' # empty secret message string
     index = 0  # start at beginning
 
