@@ -7,7 +7,7 @@ Hide secret messages within images by using LSB manipulation.
 - [x] LSB modification without visual impact (3 bits per pixel, rgb)
 - [x] Append delimiter for decoding
 - [x] Remove alpha channel to ensure 3-channel compatibility
-- [ ] Decoder
+- [X] Decoder
 - [ ] Error handling
 - [ ] CLI instead of hardcode
 - [ ] *TBD*
@@ -22,4 +22,4 @@ See [`encoder.py`](encoder.py) for the current implementation.
 
 ### Decoder
 
-(*TBD*)
+See [`decoder.py`](decoder.py) for the current implementation.
